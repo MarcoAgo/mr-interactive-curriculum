@@ -1,10 +1,12 @@
 import { useRef } from "react";
-import { FiMapPin } from "react-icons/fi";
 import { FloatingShape } from "@/components/FloatingShape";
 import { SectionHeading } from "@/components/SectionHeading";
 import { useBlockReveal } from "@/hooks/use-block-reveal";
 import { CONTACT_CARDS } from "./_constants/contact-cards.constants";
 import { ContactCard } from "./_partials/ContactCard";
+
+const CV_FILE_PATH = "/Marco-Agostinelli-CV.pdf";
+const CV_FILE_NAME = "Marco-Agostinelli-CV.pdf";
 
 export const ContactSection = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -31,29 +33,23 @@ export const ContactSection = () => {
           className="contact__heading"
         />
 
-        <div className="contact__grid" data-para-block>
-          {CONTACT_CARDS.map((card) => (
-            <ContactCard key={card.eyebrow} card={card} />
-          ))}
-
-          <div className="contact__location" data-para>
-            <span className="contact__location-main">
-              <span className="contact__location-icon">
-                <FiMapPin size={20} />
-              </span>
-              <span className="contact__location-text">
-                <span className="contact__location-label">Based in</span>
-                <span className="contact__location-value">Verona, Italy</span>
-              </span>
-            </span>
-            <span className="contact__location-remote">Available remote</span>
+        <div className="contact__rows">
+          <div className="contact__row contact__row--primary" data-para-block>
+            {CONTACT_CARDS.filter((card) => card.row === 1).map((card) => (
+              <ContactCard key={card.eyebrow} card={card} />
+            ))}
+          </div>
+          <div className="contact__row contact__row--secondary" data-para-block>
+            {CONTACT_CARDS.filter((card) => card.row === 2).map((card) => (
+              <ContactCard key={card.eyebrow} card={card} />
+            ))}
           </div>
         </div>
 
         <div className="contact__cta">
-          <button type="button" className="contact__download" onClick={() => window.print()}>
+          <a className="contact__download" href={CV_FILE_PATH} download={CV_FILE_NAME}>
             Download CV (PDF)
-          </button>
+          </a>
         </div>
 
         <p className="contact__legal">

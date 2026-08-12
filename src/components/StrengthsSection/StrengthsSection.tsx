@@ -30,8 +30,8 @@ export const StrengthsSection = () => {
         />
 
         <div className="strengths__grid">
-          {STRENGTH_ITEMS.map((item) => (
-            <StrengthCard key={item.title} item={item} />
+          {STRENGTH_ITEMS.map((item, i) => (
+            <StrengthCard key={item.title} item={item} orderIndex={i} />
           ))}
         </div>
       </div>

@@ -3,10 +3,11 @@ import { FloatingShape } from "@/components/FloatingShape";
 import { SectionHeading } from "@/components/SectionHeading";
 import { gsap } from "@/lib/gsap/gsap-plugins";
 import { EXPERIENCE_ITEMS } from "./_constants/experience-items.constants";
-import { ExperienceTimelineCard } from "./_partials/ExperienceTimelineCard";
+import { computeCardFocus, computeChildFocus } from "./_helpers/rail-focus.helpers";
+import { ExperienceTimelineRailItem } from "./_partials/ExperienceTimelineRailItem";
 
-const CARD_REVEAL_SELECTOR =
-  ".timeline-card__top, .timeline-card__role, .timeline-card__org, .timeline-card__description";
+const VIOLET_RGB = "138,124,255";
+const CYAN_RGB = "111,227,208";
 
 export const ExperienceTimeline = () => {
   const pinRef = useRef<HTMLDivElement | null>(null);
@@ -24,7 +25,50 @@ export const ExperienceTimeline = () => {
     const ctx = gsap.context(() => {
       const getDistance = () => Math.max(track.scrollWidth - viewport.clientWidth, 0);
 
-      const horizontalTween = gsap.to(track, {
+      const runFocusPass = () => {
+        const viewportRect = viewport.getBoundingClientRect();
+        const viewportWidth = viewportRect.width;
+        const items = gsap.utils.toArray<HTMLElement>("[data-rail-item]", track);
+
+        const measured = items.map((item) => ({
+          item,
+          rect: item.getBoundingClientRect(),
+          intern: item.classList.contains("rail-item--alt"),
+        }));
+
+        measured.forEach(({ item, rect, intern }) => {
+          const cardCenterX = rect.left + rect.width / 2;
+          const t = computeCardFocus(cardCenterX, viewportWidth);
+          const rgb = intern ? CYAN_RGB : VIOLET_RGB;
+
+          const kids = Array.from(item.children) as HTMLElement[];
+          kids.forEach((kid, i) => {
+            const q = computeChildFocus(t, i);
+            gsap.set(kid, {
+              opacity: 0.05 + q * 0.95,
+              filter: `blur(${((1 - q) * 5).toFixed(2)}px)`,
+              y: (1 - q) * 14,
+            });
+          });
+
+          const node = item.querySelector<HTMLElement>("[data-node]");
+          if (node) {
+            gsap.set(node, {
+              scale: 0.55 + t * 0.95,
+              boxShadow: `0 0 ${(5 + t * 22).toFixed(1)}px ${(1 + t * 3).toFixed(1)}px rgba(${rgb},${(0.18 + t * 0.5).toFixed(3)})`,
+            });
+          }
+
+          const role = item.querySelector<HTMLElement>("[data-role]");
+          if (role) {
+            gsap.set(role, {
+              textShadow: t > 0.04 ? `0 0 ${(t * 24).toFixed(1)}px rgba(${rgb},${(t * 0.5).toFixed(3)})` : "none",
+            });
+          }
+        });
+      };
+
+      gsap.to(track, {
         x: () => -getDistance(),
         ease: "none",
         scrollTrigger: {
@@ -37,28 +81,10 @@ export const ExperienceTimeline = () => {
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             if (progress) gsap.set(progress, { scaleX: self.progress });
+            runFocusPass();
           },
+          onRefresh: runFocusPass,
         },
-      });
-
-      gsap.utils.toArray<HTMLElement>(".timeline-card", track).forEach((card) => {
-        const kids = card.querySelectorAll(CARD_REVEAL_SELECTOR);
-        gsap.set(kids, { opacity: 0.05, filter: "blur(5px)", y: 14 });
-        gsap.to(kids, {
-          opacity: 1,
-          filter: "blur(0px)",
-          y: 0,
-          duration: 0.8,
-          ease: "power2.out",
-          stagger: 0.08,
-          scrollTrigger: {
-            containerAnimation: horizontalTween,
-            trigger: card,
-            start: "left 78%",
-            end: "left 35%",
-            scrub: 0.6,
-          },
-        });
       });
     }, pinEl);
 
@@ -81,9 +107,11 @@ export const ExperienceTimeline = () => {
         </div>
 
         <div className="timeline__viewport" ref={viewportRef}>
+          <span className="rail__line" />
+          <span className="rail__glow" />
           <div className="timeline__track" ref={trackRef}>
-            {EXPERIENCE_ITEMS.map((item, i) => (
-              <ExperienceTimelineCard key={item.company + item.period} item={item} delay={`${0.55 + i * 0.55}s`} />
+            {EXPERIENCE_ITEMS.map((item) => (
+              <ExperienceTimelineRailItem key={item.index} item={item} />
             ))}
           </div>
         </div>

@@ -19,6 +19,11 @@ export interface TModalOptions {
   footer?: ReactNode;
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   onClose?: () => void;
+  contentClassName?: string;
+  backdropClassName?: string;
+  bodyClassName?: string;
+  hideCloseButton?: boolean;
+  motionPreset?: "scale" | "slide-in-bottom" | "slide-in-top" | "slide-in-left" | "slide-in-right" | "none";
 }
 
 export interface TUiStoreModel {
