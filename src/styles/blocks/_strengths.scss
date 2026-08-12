@@ -1,0 +1,51 @@
+.strengths {
+  position: relative;
+  overflow: hidden;
+}
+
+.strengths__drift {
+  position: absolute;
+  left: clamp(-40px, -3vw, -10px);
+  bottom: 12%;
+}
+
+.strengths__heading {
+  margin-bottom: clamp(44px, 9vh, 100px);
+}
+
+.strengths__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 1px;
+  background: var(--exp-border-soft);
+  border: 1px solid var(--exp-border-soft);
+}
+
+.strength-card {
+  background: var(--exp-bg);
+  padding: clamp(24px, 2.8vw, 40px);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.strength-card__index {
+  font-family: var(--exp-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--exp-accent);
+}
+
+.strength-card__title {
+  margin: 0;
+  font-size: clamp(19px, 1.7vw, 23px);
+  font-weight: 600;
+  color: var(--exp-text-strong);
+}
+
+.strength-card__description {
+  margin: 0;
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.6;
+  color: var(--exp-text-muted);
+}

@@ -1,0 +1,145 @@
+.timeline__inner {
+  position: relative;
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline__head {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(24px, 5vh, 64px) clamp(20px, 5vw, 72px) 0;
+}
+
+.timeline__head-shape {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.timeline__viewport {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  padding: clamp(10px, 2vh, 22px) 0;
+}
+
+.timeline__track {
+  display: flex;
+  align-items: stretch;
+  min-height: 0;
+  gap: clamp(18px, 2.4vw, 40px);
+  padding: 0 clamp(20px, 5vw, 72px);
+  will-change: transform;
+}
+
+.timeline__footer {
+  flex: 0 0 auto;
+  padding: 0 clamp(20px, 5vw, 72px) clamp(18px, 4vh, 42px);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.timeline__footer-label {
+  font-family: var(--exp-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--exp-text-faint);
+  white-space: nowrap;
+}
+
+.timeline__progress-track {
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--exp-border);
+  position: relative;
+  overflow: hidden;
+  display: block;
+}
+
+.timeline__progress-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--exp-accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  display: block;
+}
+
+.timeline-card {
+  flex: 0 0 auto;
+  width: clamp(300px, 50vw, 720px);
+  max-height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(10px, 1.8vh, 18px);
+  padding: clamp(22px, 3.4vw, 54px) clamp(26px, 5vw, 88px);
+  border: 1px solid var(--exp-border);
+  background: var(--exp-bg-raised);
+  animation: neon-edge 7s ease-in-out infinite;
+  animation-delay: var(--card-delay, 0s);
+}
+
+.timeline-card__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.timeline-card__period {
+  font-family: var(--exp-font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--exp-accent);
+}
+
+.timeline-card__index {
+  font-family: var(--exp-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--exp-text-faint);
+}
+
+.timeline-card__role {
+  margin: 0;
+  font-size: clamp(19px, 1.8vw, 25px);
+  line-height: 1.15;
+  font-weight: 600;
+  color: var(--exp-text-strong);
+}
+
+.timeline-card__org {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.timeline-card__company {
+  font-size: 15.5px;
+  color: var(--exp-text-muted);
+}
+
+.timeline-card__location {
+  font-family: var(--exp-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--exp-text-faint);
+}
+
+.timeline-card__description {
+  margin: 0;
+  font-size: clamp(15px, 1.2vw, 17.5px);
+  line-height: 1.6;
+  color: #b9b9c2;
+  max-width: 56ch;
+}

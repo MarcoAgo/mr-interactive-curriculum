@@ -1,0 +1,83 @@
+.floating-shape {
+  pointer-events: none;
+  will-change: transform;
+  opacity: var(--shape-opacity, 1);
+}
+
+.floating-shape__motion {
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-duration: var(--motion-duration, 12s);
+  animation-direction: var(--motion-direction, normal);
+
+  &--orbit {
+    animation-name: orbit;
+  }
+
+  &--bob {
+    animation-name: bob;
+  }
+
+  &--spin-slow {
+    animation-name: spin-slow;
+    animation-timing-function: linear;
+  }
+
+  &--swell {
+    animation-name: swell;
+  }
+}
+
+.floating-shape__body {
+  display: block;
+
+  &--ring {
+    width: clamp(var(--shape-min), var(--shape-preferred), var(--shape-max));
+    height: clamp(var(--shape-min), var(--shape-preferred), var(--shape-max));
+    border: 1px solid var(--exp-accent);
+    border-radius: 50%;
+    box-shadow:
+      0 0 24px rgba(138, 124, 255, 0.5),
+      inset 0 0 24px rgba(138, 124, 255, 0.28);
+  }
+
+  &--squircle {
+    width: clamp(var(--shape-min), var(--shape-preferred), var(--shape-max));
+    height: clamp(var(--shape-min), var(--shape-preferred), var(--shape-max));
+    border: 1px solid rgba(138, 124, 255, 0.55);
+    border-radius: 32%;
+    box-shadow: 0 0 22px rgba(138, 124, 255, 0.38);
+  }
+
+  &--square {
+    width: clamp(var(--shape-min), var(--shape-preferred), var(--shape-max));
+    height: clamp(var(--shape-min), var(--shape-preferred), var(--shape-max));
+    border: 1px solid var(--exp-accent);
+    box-shadow: 0 0 20px rgba(138, 124, 255, 0.45);
+    transform: rotate(18deg);
+  }
+
+  &--dot {
+    width: clamp(var(--shape-min), var(--shape-preferred), var(--shape-max));
+    height: clamp(var(--shape-min), var(--shape-preferred), var(--shape-max));
+    border-radius: 50%;
+    background: var(--exp-accent);
+    box-shadow: 0 0 18px 4px rgba(138, 124, 255, 0.75);
+  }
+
+  &--line {
+    width: clamp(180px, 26vw, 420px);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--exp-accent), transparent);
+    box-shadow: 0 0 12px rgba(138, 124, 255, 0.6);
+  }
+
+  &--triangle {
+    width: 0;
+    height: 0;
+    border-left: clamp(46px, 7vw, 105px) solid transparent;
+    border-right: clamp(46px, 7vw, 105px) solid transparent;
+    border-bottom: clamp(80px, 12vw, 180px) solid rgba(138, 124, 255, 0.13);
+    filter: drop-shadow(0 0 14px rgba(138, 124, 255, 0.55));
+  }
+}

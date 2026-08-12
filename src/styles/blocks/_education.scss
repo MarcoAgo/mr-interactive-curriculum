@@ -1,0 +1,130 @@
+.education {
+  position: relative;
+  overflow: hidden;
+}
+
+.education__drift {
+  position: absolute;
+  right: clamp(-60px, -4vw, -20px);
+  top: 14%;
+}
+
+.education__heading {
+  margin-bottom: clamp(44px, 9vh, 100px);
+}
+
+.education__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: clamp(36px, 6vw, 90px);
+  align-items: start;
+}
+
+.education__history {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 4vh, 44px);
+}
+
+.education-block {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+  gap: 14px 28px;
+  padding-bottom: clamp(20px, 3vh, 32px);
+  border-bottom: 1px solid var(--exp-border-soft);
+
+  &:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+}
+
+.education-block__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.education-block__period {
+  font-family: var(--exp-font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--exp-accent);
+}
+
+.education-block__title {
+  margin: 0;
+  font-size: clamp(19px, 1.8vw, 24px);
+  font-weight: 600;
+  color: var(--exp-text-strong);
+}
+
+.education-block__place {
+  font-size: 15px;
+  color: var(--exp-text-dim);
+}
+
+.education-block__description {
+  margin: 0;
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.6;
+  color: var(--exp-text-muted);
+}
+
+.education__languages {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 3.4vh, 34px);
+}
+
+.education__languages-label {
+  font-family: var(--exp-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--exp-text-faint);
+}
+
+.language-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.language-row__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.language-row__name {
+  font-size: clamp(19px, 1.7vw, 23px);
+  color: var(--exp-text-strong);
+}
+
+.language-row__level {
+  font-family: var(--exp-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--exp-text-dim);
+}
+
+.language-row__track {
+  height: 2px;
+  background: var(--exp-border-soft);
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.language-row__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--exp-accent);
+  box-shadow: 0 0 10px rgba(138, 124, 255, 0.6);
+  transform: scaleX(0);
+  transform-origin: left center;
+  display: block;
+}

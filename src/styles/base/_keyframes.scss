@@ -1,0 +1,129 @@
+@keyframes grid-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 56px;
+  }
+}
+
+@keyframes orbit {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(14px, -18px) rotate(120deg);
+  }
+  66% {
+    transform: translate(-12px, 10px) rotate(240deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(360deg);
+  }
+}
+
+@keyframes bob {
+  0% {
+    transform: translateY(0) rotate(-8deg);
+  }
+  50% {
+    transform: translateY(-22px) rotate(6deg);
+  }
+  100% {
+    transform: translateY(0) rotate(-8deg);
+  }
+}
+
+@keyframes swell {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.14);
+    opacity: 0.95;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float-slow {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(3%, -4%) scale(1.06);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes scroll-hint {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  45% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  55% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+@keyframes neon-edge {
+  0%,
+  100% {
+    border-color: var(--exp-border);
+    box-shadow: 0 0 0 rgba(138, 124, 255, 0);
+  }
+  50% {
+    border-color: rgba(138, 124, 255, 0.42);
+    box-shadow:
+      0 0 22px rgba(138, 124, 255, 0.14),
+      inset 0 0 18px rgba(138, 124, 255, 0.05);
+  }
+}
+
+@keyframes neon-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 14px rgba(138, 124, 255, 0.16),
+      inset 0 0 10px rgba(138, 124, 255, 0.06);
+    border-color: rgba(138, 124, 255, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 26px rgba(138, 124, 255, 0.42),
+      inset 0 0 16px rgba(138, 124, 255, 0.14);
+    border-color: rgba(138, 124, 255, 0.7);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001s !important;
+    transition-duration: 0.001s !important;
+  }
+}

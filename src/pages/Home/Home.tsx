@@ -1,43 +1,52 @@
-import { Link } from "react-router";
-import { Button } from "@/components/Button";
-import { Card } from "@/components/Card";
-import { ColorModeButton } from "@/components/ui/ColorMode";
-import { useUiStore } from "@/store/ui/use-ui";
-import {
-  selectorUiCloseModal,
-  selectorUiOpenModal,
-  selectorUiToastSuccess,
-} from "@/store/ui/ui.selectors";
+import { useLayoutEffect, useRef } from "react";
+import { ContactSection } from "@/components/ContactSection";
+import { EducationSection } from "@/components/EducationSection";
+import { ExperienceTimeline } from "@/components/ExperienceTimeline";
+import { HeroSection } from "@/components/HeroSection";
+import { ProfileSection } from "@/components/ProfileSection";
+import { ScrollProgressBar } from "@/components/ScrollProgressBar";
+import { ShaderBackground } from "@/components/ShaderBackground";
+import { SkillsSection } from "@/components/SkillsSection";
+import { StrengthsSection } from "@/components/StrengthsSection";
+import { useParallaxField } from "@/hooks/use-parallax-field";
+import { ScrollSmoother } from "@/lib/gsap/gsap-plugins";
 
 export const Home = () => {
-  const toastSuccess = useUiStore(selectorUiToastSuccess);
-  const openModal = useUiStore(selectorUiOpenModal);
-  const closeModal = useUiStore(selectorUiCloseModal);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement | null>(null);
 
-  const handleOpenModal = () => {
-    openModal({
-      id: "welcome-modal",
-      title: "Welcome",
-      content: <p>This modal is driven entirely by the UI Zustand store.</p>,
+  useParallaxField();
+
+  useLayoutEffect(() => {
+    document.body.style.background = "#0a0a0b";
+
+    const smoother = ScrollSmoother.create({
+      wrapper: wrapperRef.current,
+      content: contentRef.current,
+      smooth: 1.4,
+      smoothTouch: 0.1,
+      normalizeScroll: true,
     });
-  };
+
+    return () => {
+      smoother.kill();
+      document.body.style.background = "";
+    };
+  }, []);
 
   return (
-    <div style={{ padding: "var(--spacing-xl)" }}>
-      <ColorModeButton />
-      <Card title="mr-fe-boilerplate">
-        <p>Vite + React 19 + TypeScript + Chakra UI + Zustand + TanStack Query.</p>
-        <Button onClick={() => toastSuccess("It works!")}>Trigger a toast</Button>
-        <Button variant="secondary" onClick={handleOpenModal}>
-          Open a modal
-        </Button>
-        <Button variant="secondary" onClick={closeModal}>
-          Close modal
-        </Button>
-      </Card>
-      <p>
-        <Link to="/about">Go to About</Link>
-      </p>
+    <div ref={wrapperRef} id="smooth-wrapper">
+      <ShaderBackground />
+      <ScrollProgressBar />
+      <div ref={contentRef} id="smooth-content" className="experience">
+        <HeroSection />
+        <ProfileSection />
+        <ExperienceTimeline />
+        <SkillsSection />
+        <EducationSection />
+        <StrengthsSection />
+        <ContactSection />
+      </div>
     </div>
   );
 };

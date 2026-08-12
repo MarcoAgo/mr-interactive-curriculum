@@ -4,6 +4,19 @@
 @use "base/reset";
 @use "base/typography";
 @use "base/scrollbar";
+@use "base/keyframes";
 
 @use "blocks/button";
 @use "blocks/card";
+@use "blocks/experience";
+@use "blocks/scroll-progress";
+@use "blocks/floating-shape";
+@use "blocks/section-heading";
+@use "blocks/hero";
+@use "blocks/profile";
+@use "blocks/timeline";
+@use "blocks/skills";
+@use "blocks/education";
+@use "blocks/strengths";
+@use "blocks/contact";
+@use "blocks/shader-background";

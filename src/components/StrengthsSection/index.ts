@@ -1,0 +1,1 @@
+export { StrengthsSection } from "./StrengthsSection";
