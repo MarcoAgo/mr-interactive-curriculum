@@ -1,4 +1,7 @@
-.experience {
+// Defined on :root, not `.experience`, so portaled content (Chakra's Dialog
+// renders through a <Portal> outside this DOM subtree) can still see them —
+// CSS custom properties don't cross a portal boundary via inheritance otherwise.
+:root {
   --exp-accent: #8a7cff;
   --exp-accent-soft: rgba(138, 124, 255, 0.45);
   --exp-bg: #0a0a0b;
@@ -15,7 +18,9 @@
   --exp-font-sans: "Space Grotesk", Helvetica, Arial, sans-serif;
   --exp-font-serif: "Instrument Serif", Georgia, serif;
   --exp-font-mono: "JetBrains Mono", monospace;
+}
 
+.experience {
   position: relative;
   z-index: 1;
   min-height: 100vh;

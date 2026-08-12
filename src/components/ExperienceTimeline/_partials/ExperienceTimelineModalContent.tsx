@@ -1,3 +1,4 @@
+import { FiX } from "react-icons/fi";
 import { useUiStore } from "@/store/ui/use-ui";
 import { selectorUiCloseModal } from "@/store/ui/ui.selectors";
 import type { TExperienceItem } from "../ExperienceTimeline.types";
@@ -15,7 +16,7 @@ export const ExperienceTimelineModalContent = ({ item }: ExperienceTimelineModal
         <span className="experience-modal__sweep-line" />
       </span>
       <button type="button" className="experience-modal__close" onClick={closeModal}>
-        &#215;
+        <FiX size={16} />
       </button>
       <div className="experience-modal__meta">
         <span className="experience-modal__range">{item.range}</span>
